@@ -1,8 +1,9 @@
+import { Tree } from "./components/Tree"
 
 function App() {
     return (
         <div>
-        123
+            <Tree />
         </div>
     )
 }
