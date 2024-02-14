@@ -4,31 +4,27 @@ export const Tree = () => {
     const data = fakeTree.services
 
     const constructTree = (data) => {
-        data.map(service => {
-            if(service.node) {
-                service.children = []
-            }
+        const tree = []
+
+        data.sort((a, b) => a.sorthead - b.sorthead)
+
+        data.forEach(service => {
+            service.children = []
         })
 
-        data.map(service => {
-            if (!service.node) {
-                if (service.head) {
-                    const parentService = data[service.head - 1]
+        data.forEach(service => {
+            if (service.head !== null) {
+                const parentService = data.find(parent => parent.id === service.head)
+
+                if (parentService) {
                     parentService.children.push(service)
                 }
+            } else {
+                tree.push(service)
             }
         })
 
-        const filteredData = data.filter(service => service.node === 1 || service.head === null)
-
-        filteredData.map(service => {
-            if (service.head) {
-                const parentService = data[service.head - 1]
-                parentService.children.push(service)
-            }
-        })
-
-        return filteredData.filter(service => service.head === null)
+        return tree
     }
 
     const renderTreeNodes = (nodes) => {

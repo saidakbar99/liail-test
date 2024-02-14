@@ -1,9 +1,10 @@
-import { Tree } from "./components/Tree"
+import {Tree} from "./components/Tree"
+import { fakeTree } from "./mock/fakeTree"
 
 function App() {
     return (
         <div>
-            <Tree />
+            <Tree data={fakeTree.services} />
         </div>
     )
 }
